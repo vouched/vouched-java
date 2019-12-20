@@ -18,9 +18,9 @@ public class VouchedException extends Exception {
 
   public static VouchedException from(ResponseError responseError) {
     if (responseError.extensions != null && responseError.extensions.code != null)
-      return new VouchedException("", responseError.extensions.code);
+      return new VouchedException(responseError.message, responseError.extensions.code);
 
-    return new VouchedException("", UnknownSystemError);
+    return new VouchedException(responseError.message, UnknownSystemError);
   }
 
   public String getType() {

@@ -2,8 +2,11 @@ package com.vouched.sdk.graphql;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vouched.sdk.VouchedException;
+import org.mountcloud.graphql.request.GraphqlRequest;
 import org.mountcloud.graphql.request.GraphqlRequestType;
 import org.mountcloud.graphql.request.query.GraphqlQuery;
+import org.mountcloud.graphql.response.DefaultGraphqlResponse;
+import org.mountcloud.graphql.response.GraphqlResponse;
 import org.mountcloud.graphql.util.HttpClientUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,9 +21,9 @@ public class GraphQlClient {
         this.key = key;
     }
 
-    public <T> T query(GraphqlQuery query, Class<T> responseClass) throws VouchedException {
+    public <T> T doRequest(GraphqlRequest request, Class<T> responseClass) throws VouchedException {
         try {
-            String result = doHttpRequest(query.toString(), GraphqlRequestType.POST);
+            String result = doHttpRequest(request.toString(), GraphqlRequestType.POST);
 
             if (result == null) throw new IOException("Failed to fetch");
 

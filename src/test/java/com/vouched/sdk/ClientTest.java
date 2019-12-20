@@ -18,6 +18,17 @@ public class ClientTest {
   }
 
   @Test
+  public void shouldSubmitJob() throws VouchedException {
+    Client client = new Client(Config.get().getPrivateKey());
+
+    SubmitJob submitJob = new SubmitJob();
+    submitJob.parameters.idPhoto = "1";
+
+    Job job = client.submit(submitJob);
+    assertNotNull(job);
+  }
+
+  @Test
   public void shouldRespondWithJobs() throws VouchedException {
     Client client = new Client(Config.get().getPrivateKey());
 
