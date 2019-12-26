@@ -47,8 +47,20 @@ public class Client {
         return client.doRequest(q, Job.class, "removeJob");
     }
 
-    public Jobs getJobs(JobsFilter jobsFilter) {
+    public Jobs getJobs(JobsFilter filter) {
         GraphqlQuery q = new DefaultGraphqlQuery("jobs");
+        q.addParameter("id", filter.id);
+        q.addParameter("type", filter.type);
+        q.getRequestParameter().addObjectParameter("ids", filter.ids);
+        q.addParameter("token", filter.token);
+        q.addParameter("page", filter.page);
+        q.addParameter("pageSize", filter.pageSize);
+        q.addParameter("sortBy", filter.sortBy);
+        q.addParameter("sortOrder", filter.sortOrder);
+        q.addParameter("status", filter.status);
+        q.addParameter("to", filter.to);
+        q.addParameter("from", filter.from);
+        q.addParameter("withPhotos", filter.withPhotos);
         q.addResultAttributes(new GraphQlResult().getAttributes(Jobs.class));
 
         GraphQlClient client = new GraphQlClient(Config.get().getServer(), this.key);
