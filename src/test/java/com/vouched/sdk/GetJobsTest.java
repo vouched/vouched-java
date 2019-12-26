@@ -10,7 +10,7 @@ public class GetJobsTest {
     Client client = new Client(Config.get().getPrivateKey());
 
     try {
-      client.removeJob("USkjk33");
+      client.removeJob("OWIOSI5O1");
       fail("Exception expected");
     } catch (VouchedException e) {
       assertEquals(VouchedError.InvalidRequestError, e.getType());

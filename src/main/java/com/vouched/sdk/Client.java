@@ -12,13 +12,13 @@ public class Client {
     }
 
     public String updateSecretClientKey(String secretClientKey) {
-        GraphqlMutation mutation = new DefaultGraphqlMutation("updateSecretClientKey");
+        GraphqlMutation q = new DefaultGraphqlMutation("updateSecretClientKey");
 
-        mutation.addParameter("secretClientKey", secretClientKey);
-        mutation.addResultAttributes(new GraphQlResult().getAttributes(UpdatedKey.class));
+        q.addParameter("secretClientKey", secretClientKey);
+        q.addResultAttributes(new GraphQlResult().getAttributes(UpdatedKey.class));
 
         GraphQlClient client = new GraphQlClient(Config.get().getServer(), this.key);
-        return client.doRequest(mutation, UpdatedKey.class, "updateSecretClientKey").secretClientKey;
+        return client.doRequest(q, UpdatedKey.class, "updateSecretClientKey").secretClientKey;
     }
 
     public static class UpdatedKey {
@@ -26,32 +26,33 @@ public class Client {
     }
 
     public Job submit(JobRequest jobRequest) {
-        GraphqlMutation mutation = new DefaultGraphqlMutation("submitJob");
+        GraphqlMutation q = new DefaultGraphqlMutation("submitJob");
 
-        mutation
+        q
                 .addParameter("type", jobRequest.type)
                 .addParameter("callbackURL", jobRequest.callbackURL)
                 .addObjectParameter("params", jobRequest.parameters)
                 .addObjectParameter("properties", jobRequest.properties);
 
         GraphQlClient client = new GraphQlClient(Config.get().getServer(), this.key);
-        return client.doRequest(mutation, Job.class, "job");
+        return client.doRequest(q, Job.class, "job");
     }
 
     public Job removeJob(String id) {
-        GraphqlMutation mutation = new DefaultGraphqlMutation("removeJob");
-        mutation.addParameter("id", id);
+        GraphqlMutation q = new DefaultGraphqlMutation("removeJob");
+        q.addParameter("id", id);
+        q.addResultAttributes(new GraphQlResult().getAttributes(Job.class));
 
         GraphQlClient client = new GraphQlClient(Config.get().getServer(), this.key);
-        return client.doRequest(mutation, Job.class, "job");
+        return client.doRequest(q, Job.class, "job");
     }
 
     public Jobs getJobs(JobsFilter jobsFilter) {
-        GraphqlQuery query = new DefaultGraphqlQuery("jobs");
-        query.addResultAttributes(new GraphQlResult().getAttributes(Jobs.class));
+        GraphqlQuery q = new DefaultGraphqlQuery("jobs");
+        q.addResultAttributes(new GraphQlResult().getAttributes(Jobs.class));
 
         GraphQlClient client = new GraphQlClient(Config.get().getServer(), this.key);
-        return client.doRequest(query, Jobs.class, "jobs");
+        return client.doRequest(q, Jobs.class, "jobs");
     }
 
     private final String key;
