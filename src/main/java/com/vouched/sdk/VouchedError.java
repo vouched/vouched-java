@@ -18,5 +18,5 @@ public class VouchedError {
     public String type;
     public String message;
     public String suggestion;
-    public List<VouchedError> errors;
+    public VouchedError[] errors;
 }

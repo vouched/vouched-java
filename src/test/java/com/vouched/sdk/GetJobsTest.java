@@ -6,14 +6,15 @@ import static org.junit.Assert.*;
 
 public class GetJobsTest {
   @Test
-  public void shouldSubmitJob() throws VouchedException {
+  public void shouldFailToRemoveNonExistingJob() throws VouchedException {
     Client client = new Client(Config.get().getPrivateKey());
 
-    JobRequest jobRequest = new JobRequest();
-    jobRequest.parameters.idPhoto = "1";
-
-    Job job = client.submit(jobRequest);
-    assertNotNull(job);
+    try {
+      client.removeJob("USkjk33");
+      fail("Exception expected");
+    } catch (VouchedException e) {
+      assertEquals(VouchedError.InvalidRequestError, e.getType());
+    }
   }
 
   @Test

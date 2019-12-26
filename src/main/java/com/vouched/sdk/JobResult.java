@@ -11,5 +11,4 @@ public class JobResult {
     public String firstName;
     public String lastName;
     public Confidences confidences;
-    public VouchedError[] errors;
 }

@@ -15,7 +15,7 @@ public class Client {
         GraphqlMutation mutation = new DefaultGraphqlMutation("updateSecretClientKey");
 
         mutation.addParameter("secretClientKey", secretClientKey);
-        mutation.addResultAttributes("secretClientKey");
+        mutation.addResultAttributes(new GraphQlResult().getAttributes(UpdatedKey.class));
 
         GraphQlClient client = new GraphQlClient(Config.get().getServer(), this.key);
         return client.doRequest(mutation, UpdatedKey.class, "updateSecretClientKey").secretClientKey;
@@ -39,12 +39,16 @@ public class Client {
     }
 
     public Job removeJob(String id) {
-        return null;
+        GraphqlMutation mutation = new DefaultGraphqlMutation("removeJob");
+        mutation.addParameter("id", id);
+
+        GraphQlClient client = new GraphQlClient(Config.get().getServer(), this.key);
+        return client.doRequest(mutation, Job.class, "job");
     }
 
     public Jobs getJobs(JobsFilter jobsFilter) {
         GraphqlQuery query = new DefaultGraphqlQuery("jobs");
-        query.addResultAttributes("total");
+        query.addResultAttributes(new GraphQlResult().getAttributes(Jobs.class));
 
         GraphQlClient client = new GraphQlClient(Config.get().getServer(), this.key);
         return client.doRequest(query, Jobs.class, "jobs");
@@ -52,4 +56,6 @@ public class Client {
 
     private final String key;
 }
+
+
 
