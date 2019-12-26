@@ -3,10 +3,7 @@ package com.vouched.sdk.graphql;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.*;
 import com.vouched.sdk.VouchedException;
 
 import java.io.IOException;
@@ -27,14 +24,17 @@ public class ResponseDeserializer<T> extends JsonDeserializer<T> {
 
         JsonNode errors = node.get("errors");
 
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
         if (errors != null && errors.size() > 0) {
-            ResponseError responseError = new ObjectMapper().treeToValue(errors.get(0), ResponseError.class);
+            ResponseError responseError = mapper.treeToValue(errors.get(0), ResponseError.class);
             throw VouchedException.from(responseError);
         }
 
         JsonNode data = node.get("data");
         JsonNode response = data.get(responseFieldName);
 
-        return new ObjectMapper().treeToValue(response, responseClass);
+        return mapper.treeToValue(response, responseClass);
     }
 }

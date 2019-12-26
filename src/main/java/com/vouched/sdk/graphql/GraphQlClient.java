@@ -1,8 +1,8 @@
 package com.vouched.sdk.graphql;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.vouched.sdk.Jobs;
 import com.vouched.sdk.VouchedError;
 import com.vouched.sdk.VouchedException;
 import org.mountcloud.graphql.request.GraphqlRequest;
@@ -21,16 +21,18 @@ public class GraphQlClient {
 
     public <T> T doRequest(GraphqlRequest request, Class<T> responseClass, String responseKey) throws VouchedException {
         try {
+            System.out.println("OUT: " + request.toString());
+
             String result = doHttpRequest(request.toString(), GraphqlRequestType.POST);
 
-            System.out.println(result);
+            System.out.println("IN: " + result);
 
             if (result == null) throw new IOException("Failed to fetch");
 
             ObjectMapper responseMapper = createResponseMapper(responseClass, responseKey);
             return responseMapper.readValue(result, responseClass);
         } catch (IOException e) {
-            throw new VouchedException(e.getMessage(), VouchedError.ConnectionError);
+            throw new VouchedException(e.getMessage(), VouchedError.ConnectionError, null);
         }
     }
 
@@ -49,6 +51,7 @@ public class GraphQlClient {
     @SuppressWarnings("unchecked")
     private ObjectMapper createResponseMapper(Class responseClass, String responseKey) {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         SimpleModule module = new SimpleModule();
         module.addDeserializer(responseClass, new ResponseDeserializer(responseClass, responseKey));

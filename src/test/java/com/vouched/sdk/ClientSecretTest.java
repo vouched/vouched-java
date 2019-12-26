@@ -22,7 +22,7 @@ public class ClientSecretTest {
     Client client = new Client(Config.get().getPrivateKey());
 
     try {
-      client.updateClientSecret("x");
+      client.updateSecretClientKey("x");
       fail("Exception expected");
     } catch (VouchedException e) {
       assertEquals(VouchedError.InvalidRequestError, e.getType());

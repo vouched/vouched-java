@@ -11,8 +11,16 @@ public class Client {
         this.key = key;
     }
 
-    public String updateClientSecret(String clientSecret) {
-        return clientSecret;
+    public String updateSecretClientKey(String secretClientKey) {
+        GraphqlMutation mutation = new DefaultGraphqlMutation("updateSecretClientKey");
+
+        mutation
+                .addParameter("secretClientKey", secretClientKey);
+
+        mutation.addResultAttributes("secretClientKey");
+
+        GraphQlClient client = new GraphQlClient(Config.get().getServer(), this.key);
+        return client.doRequest(mutation, String.class, "secretClientKey");
     }
 
     public Job submit(JobRequest jobRequest) {
