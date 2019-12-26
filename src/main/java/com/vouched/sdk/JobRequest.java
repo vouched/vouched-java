@@ -2,7 +2,7 @@ package com.vouched.sdk;
 
 import java.util.Map;
 
-public class SubmitJob {
+public class JobRequest {
     public String type = "id-verification";
     public String callbackURL;
     public Map<String, String> properties;

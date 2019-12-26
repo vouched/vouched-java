@@ -2,14 +2,12 @@ package com.vouched.sdk;
 
 import com.vouched.sdk.graphql.ResponseError;
 
+import static com.vouched.sdk.VouchedError.UnknownSystemError;
+
 public class VouchedException extends RuntimeException {
   private static final long serialVersionUID = 8918828512143293558L;
 
   private String type;
-
-  public static String UnknownSystemError = "UnknownSystemError";
-  public static String CommunicationError = "CommunicationError";
-  public static String UNAUTHENTICATED = "UNAUTHENTICATED";
 
   public VouchedException(String message, String type) {
     super(message);

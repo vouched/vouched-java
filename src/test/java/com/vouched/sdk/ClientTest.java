@@ -13,7 +13,7 @@ public class ClientTest {
       client.getJobs();
       fail("Exception expected");
     } catch (VouchedException e) {
-      assertEquals(VouchedException.UNAUTHENTICATED, e.getType());
+      assertEquals(VouchedError.UNAUTHENTICATED, e.getType());
     }
   }
 
