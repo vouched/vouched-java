@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.vouched.sdk.Jobs;
+import com.vouched.sdk.VouchedError;
 import com.vouched.sdk.VouchedException;
 import org.mountcloud.graphql.request.GraphqlRequest;
 import org.mountcloud.graphql.request.GraphqlRequestType;
@@ -35,7 +36,7 @@ public class GraphQlClient {
 
             return responseMapper.readValue(result, responseClass);
         } catch (IOException e) {
-            throw new VouchedException(e.getMessage(), VouchedException.CommunicationError);
+            throw new VouchedException(e.getMessage(), VouchedError.ConnectionError);
         }
     }
 
