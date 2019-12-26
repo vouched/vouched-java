@@ -28,4 +28,12 @@ public class ClientSecretTest {
       assertEquals(VouchedError.InvalidRequestError, e.getType());
     }
   }
+
+  @Test
+  public void shouldUpdateSecretSuccessfully() throws VouchedException {
+    Client client = new Client(Config.get().getPrivateKey());
+
+    String key = client.updateSecretClientKey(Config.get().getPrivateKey());
+    assertEquals(Config.get().getPrivateKey(), key);
+  }
 }

@@ -14,13 +14,15 @@ public class Client {
     public String updateSecretClientKey(String secretClientKey) {
         GraphqlMutation mutation = new DefaultGraphqlMutation("updateSecretClientKey");
 
-        mutation
-                .addParameter("secretClientKey", secretClientKey);
-
+        mutation.addParameter("secretClientKey", secretClientKey);
         mutation.addResultAttributes("secretClientKey");
 
         GraphQlClient client = new GraphQlClient(Config.get().getServer(), this.key);
-        return client.doRequest(mutation, String.class, "secretClientKey");
+        return client.doRequest(mutation, UpdatedKey.class, "updateSecretClientKey").secretClientKey;
+    }
+
+    public static class UpdatedKey {
+        public String secretClientKey;
     }
 
     public Job submit(JobRequest jobRequest) {
