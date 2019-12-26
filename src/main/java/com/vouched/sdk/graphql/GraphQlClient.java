@@ -1,6 +1,5 @@
 package com.vouched.sdk.graphql;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.vouched.sdk.Jobs;
@@ -8,25 +7,19 @@ import com.vouched.sdk.VouchedError;
 import com.vouched.sdk.VouchedException;
 import org.mountcloud.graphql.request.GraphqlRequest;
 import org.mountcloud.graphql.request.GraphqlRequestType;
-import org.mountcloud.graphql.request.query.GraphqlQuery;
-import org.mountcloud.graphql.response.DefaultGraphqlResponse;
-import org.mountcloud.graphql.response.GraphqlResponse;
 import org.mountcloud.graphql.util.HttpClientUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class GraphQlClient {
-    public GraphQlClient(String server, String key, ObjectMapper responseMapper) {
+    public GraphQlClient(String server, String key) {
         this.server = server;
         this.key = key;
-        this.responseMapper = responseMapper;
     }
 
-    public <T> T doRequest(GraphqlRequest request, Class<T> responseClass) throws VouchedException {
+    public <T> T doRequest(GraphqlRequest request, Class<T> responseClass, String responseKey) throws VouchedException {
         try {
             String result = doHttpRequest(request.toString(), GraphqlRequestType.POST);
 
@@ -34,6 +27,7 @@ public class GraphQlClient {
 
             if (result == null) throw new IOException("Failed to fetch");
 
+            ObjectMapper responseMapper = createResponseMapper(responseClass, responseKey);
             return responseMapper.readValue(result, responseClass);
         } catch (IOException e) {
             throw new VouchedException(e.getMessage(), VouchedError.ConnectionError);
@@ -52,7 +46,18 @@ public class GraphQlClient {
         return httpClientUtil.doPostJson(server, json, headers);
     }
 
+    @SuppressWarnings("unchecked")
+    private ObjectMapper createResponseMapper(Class responseClass, String responseKey) {
+        ObjectMapper mapper = new ObjectMapper();
+
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(responseClass, new ResponseDeserializer(responseClass, responseKey));
+        mapper.registerModule(module);
+
+        return mapper;
+    }
+
+
     private final String server;
     private final String key;
-    private ObjectMapper responseMapper;
 }
