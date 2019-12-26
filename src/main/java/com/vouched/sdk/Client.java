@@ -1,9 +1,6 @@
 package com.vouched.sdk;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.vouched.sdk.graphql.GraphQlClient;
-import com.vouched.sdk.graphql.ResponseDeserializer;
 import org.mountcloud.graphql.request.mutation.DefaultGraphqlMutation;
 import org.mountcloud.graphql.request.mutation.GraphqlMutation;
 import org.mountcloud.graphql.request.query.DefaultGraphqlQuery;
@@ -14,7 +11,10 @@ public class Client {
         this.key = key;
     }
 
-    public Job submit(JobRequest jobRequest) throws VouchedException {
+    public String updateClientSecret(String clientSecret) {
+    }
+
+    public Job submit(JobRequest jobRequest) {
         GraphqlMutation mutation = new DefaultGraphqlMutation("submitJob");
 
         mutation
@@ -27,7 +27,10 @@ public class Client {
         return client.doRequest(mutation, Job.class, "job");
     }
 
-    public Jobs getJobs() throws VouchedException {
+    public Job removeJob(String id) {
+    }
+
+    public Jobs getJobs(JobsFilter jobsFilter) {
         GraphqlQuery query = new DefaultGraphqlQuery("jobs");
         query.addResultAttributes("total");
 
