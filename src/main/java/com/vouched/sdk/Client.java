@@ -44,7 +44,7 @@ public class Client {
         q.addResultAttributes(new GraphQlResult().getAttributes(Job.class));
 
         GraphQlClient client = new GraphQlClient(Config.get().getServer(), this.key);
-        return client.doRequest(q, Job.class, "job");
+        return client.doRequest(q, Job.class, "removeJob");
     }
 
     public Jobs getJobs(JobsFilter jobsFilter) {
