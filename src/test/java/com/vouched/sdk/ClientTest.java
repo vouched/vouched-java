@@ -18,6 +18,15 @@ public class ClientTest {
   }
 
   @Test
+  public void shouldRespondWithJobs() throws VouchedException {
+    Client client = new Client(Config.get().getPrivateKey());
+
+    Jobs jobs = client.getJobs();
+    assertTrue(jobs.total > 0);
+  }
+
+  /*
+  @Test
   public void shouldSubmitJob() throws VouchedException {
     Client client = new Client(Config.get().getPrivateKey());
 
@@ -28,11 +37,5 @@ public class ClientTest {
     assertNotNull(job);
   }
 
-  @Test
-  public void shouldRespondWithJobs() throws VouchedException {
-    Client client = new Client(Config.get().getPrivateKey());
-
-    Jobs jobs = client.getJobs();
-    assertTrue(jobs.total > 0);
-  }
+   */
 }

@@ -2,7 +2,7 @@ package com.vouched.sdk;
 
 import com.vouched.sdk.graphql.ResponseError;
 
-public class VouchedException extends Exception {
+public class VouchedException extends RuntimeException {
   private static final long serialVersionUID = 8918828512143293558L;
 
   private String type;

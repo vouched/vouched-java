@@ -1,6 +1,9 @@
 package com.vouched.sdk.graphql;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.vouched.sdk.Jobs;
 import com.vouched.sdk.VouchedException;
 import org.mountcloud.graphql.request.GraphqlRequest;
 import org.mountcloud.graphql.request.GraphqlRequestType;
@@ -16,24 +19,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GraphQlClient {
-    public GraphQlClient(String server, String key) {
+    public GraphQlClient(String server, String key, ObjectMapper responseMapper) {
         this.server = server;
         this.key = key;
+        this.responseMapper = responseMapper;
     }
 
     public <T> T doRequest(GraphqlRequest request, Class<T> responseClass) throws VouchedException {
         try {
             String result = doHttpRequest(request.toString(), GraphqlRequestType.POST);
 
+            System.out.println(result);
+
             if (result == null) throw new IOException("Failed to fetch");
 
-            Response<T> response = objectMapper.readValue(result, Response.class);
-
-            if (response.errors != null && !response.errors.isEmpty()) {
-                throw VouchedException.from(response.errors.get(0));
-            }
-
-            return response.data;
+            return responseMapper.readValue(result, responseClass);
         } catch (IOException e) {
             throw new VouchedException(e.getMessage(), VouchedException.CommunicationError);
         }
@@ -51,9 +51,7 @@ public class GraphQlClient {
         return httpClientUtil.doPostJson(server, json, headers);
     }
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
     private final String server;
     private final String key;
-
-    private static Logger logger = LoggerFactory.getLogger(GraphQlClient.class);
+    private ObjectMapper responseMapper;
 }
