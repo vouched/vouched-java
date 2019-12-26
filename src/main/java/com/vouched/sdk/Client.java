@@ -12,6 +12,7 @@ public class Client {
     }
 
     public String updateClientSecret(String clientSecret) {
+        return clientSecret;
     }
 
     public Job submit(JobRequest jobRequest) {
@@ -28,6 +29,7 @@ public class Client {
     }
 
     public Job removeJob(String id) {
+        return null;
     }
 
     public Jobs getJobs(JobsFilter jobsFilter) {
