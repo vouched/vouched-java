@@ -14,9 +14,7 @@ public class SubmitJobTest {
             "9TXL0Y4OHwAAAABJRU5ErkJggg==";
 
     JobRequest jobRequest = new JobRequest();
-//    jobRequest.parameters.userPhoto = ImageUtils.loadBase64Image("/large.jpg");
     jobRequest.parameters.userPhoto = img;
-//    jobRequest.parameters.idPhoto = ImageUtils.loadBase64Image("/small.jpg");
     jobRequest.parameters.idPhoto = img;
     jobRequest.parameters.firstName = "Thor Thunder";
     jobRequest.parameters.lastName = "odinson";
