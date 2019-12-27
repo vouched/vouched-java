@@ -25,17 +25,18 @@ public class Client {
         public String secretClientKey;
     }
 
-    public Job submit(JobRequest jobRequest) {
+    public Job submitJob(JobRequest jobRequest) {
         GraphqlMutation q = new DefaultGraphqlMutation("submitJob");
-
         q
                 .addParameter("type", jobRequest.type)
                 .addParameter("callbackURL", jobRequest.callbackURL)
-                .addObjectParameter("params", jobRequest.parameters)
+                .addObjectParameter("params", jobRequest.params)
                 .addObjectParameter("properties", jobRequest.properties);
 
+        q.addResultAttributes(new GraphQlResult().getAttributes(Job.class));
+
         GraphQlClient client = new GraphQlClient(Config.get().getServer(), this.key);
-        return client.doRequest(q, Job.class, "job");
+        return client.doRequest(q, Job.class, "submitJob");
     }
 
     public Job removeJob(String id) {
@@ -49,18 +50,20 @@ public class Client {
 
     public Jobs getJobs(JobsFilter filter) {
         GraphqlQuery q = new DefaultGraphqlQuery("jobs");
-        q.addParameter("id", filter.id);
-        q.addParameter("type", filter.type);
-        q.getRequestParameter().addObjectParameter("ids", filter.ids);
-        q.addParameter("token", filter.token);
-        q.addParameter("page", filter.page);
-        q.addParameter("pageSize", filter.pageSize);
-        q.addParameter("sortBy", filter.sortBy);
-        q.addParameter("sortOrder", filter.sortOrder);
-        q.addParameter("status", filter.status);
-        q.addParameter("to", filter.to);
-        q.addParameter("from", filter.from);
-        q.addParameter("withPhotos", filter.withPhotos);
+        q
+                .addParameter("id", filter.id)
+                .addParameter("type", filter.type)
+                .addObjectParameter("ids", filter.ids)
+                .addParameter("token", filter.token)
+                .addParameter("page", filter.page)
+                .addParameter("pageSize", filter.pageSize)
+                .addParameter("sortBy", filter.sortBy)
+                .addParameter("sortOrder", filter.sortOrder)
+                .addParameter("status", filter.status)
+                .addParameter("to", filter.to)
+                .addParameter("from", filter.from)
+                .addParameter("withPhotos", filter.withPhotos);
+
         q.addResultAttributes(new GraphQlResult().getAttributes(Jobs.class));
 
         GraphQlClient client = new GraphQlClient(Config.get().getServer(), this.key);
