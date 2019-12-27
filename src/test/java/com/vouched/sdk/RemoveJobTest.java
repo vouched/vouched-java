@@ -10,7 +10,7 @@ public class RemoveJobTest {
     Client client = new Client(Config.get().getPrivateKey());
 
     try {
-      client.removeJob("OWIOSI5O1");
+      client.removeJob("non-existing");
       fail("Exception expected");
     } catch (VouchedException e) {
       assertEquals(VouchedError.InvalidRequestError, e.getType());
@@ -21,7 +21,7 @@ public class RemoveJobTest {
   public void shouldRemoveJob() throws VouchedException {
     Client client = new Client(Config.get().getPrivateKey());
 
-    Job job = client.removeJob("OWIOSI5O");
+    Job job = client.removeJob(Config.get().getTestJobId());
     assertEquals("removed", job.status);
   }
 }

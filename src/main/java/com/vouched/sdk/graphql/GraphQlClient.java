@@ -21,11 +21,11 @@ public class GraphQlClient {
 
     public <T> T doRequest(GraphqlRequest request, Class<T> responseClass, String responseKey) throws VouchedException {
         try {
-            System.out.println("OUT: " + request.toString());
+//            System.out.println("OUT: " + request.toString());
 
             String result = doHttpRequest(request.toString(), GraphqlRequestType.POST);
 
-            System.out.println("IN: " + result);
+//            System.out.println("IN: " + result);
 
             if (result == null) throw new IOException("Failed to fetch");
 

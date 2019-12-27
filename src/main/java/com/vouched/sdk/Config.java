@@ -11,6 +11,10 @@ public class Config {
         return dotenv.get("PRIVATE_KEY");
     }
 
+    public String getTestJobId() {
+        return dotenv.get("TEST_JOB_ID");
+    }
+
     public static Config get() {
         if (config == null) {
             config = new Config();
@@ -24,7 +28,6 @@ public class Config {
     private Config() {
         dotenv = Dotenv.load();
     }
-
 
     private static Config config;
 }
