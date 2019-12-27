@@ -6,10 +6,28 @@
 
   <groupId>com.vouched.sdk</groupId>
   <artifactId>vouched-java</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.1</version>
 
-  <name>.</name>
-  <url>https://www.vouched.id</url>
+  <organization>
+    <name>Vouched</name>
+    <url>https://www.vouched.id</url>
+  </organization>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <distributionManagement>
+    <repository>
+      <id>bintray-vouched1-vouched-java</id>
+      <name>vouched1-vouched-java</name>
+      <url>https://api.bintray.com/maven/vouched1/vouched-java/vouched-java/;publish=1</url>
+    </repository>
+  </distributionManagement>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
