@@ -30,7 +30,7 @@ public class Client {
         q
                 .addParameter("type", jobRequest.type)
                 .addParameter("callbackURL", jobRequest.callbackURL)
-                .addObjectParameter("params", jobRequest.params)
+                .addObjectParameter("params", jobRequest.parameters)
                 .addObjectParameter("properties", jobRequest.properties);
 
         q.addResultAttributes(new GraphQlResult().getAttributes(Job.class));

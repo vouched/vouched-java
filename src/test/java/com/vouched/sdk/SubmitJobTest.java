@@ -15,12 +15,12 @@ public class SubmitJobTest {
 
     JobRequest jobRequest = new JobRequest();
 //    jobRequest.parameters.userPhoto = ImageUtils.loadBase64Image("/large.jpg");
-    jobRequest.params.userPhoto = img;
+    jobRequest.parameters.userPhoto = img;
 //    jobRequest.parameters.idPhoto = ImageUtils.loadBase64Image("/small.jpg");
-    jobRequest.params.idPhoto = img;
-    jobRequest.params.firstName = "Thor Thunder";
-    jobRequest.params.lastName = "odinson";
-    jobRequest.params.dob = "06/22/1970";
+    jobRequest.parameters.idPhoto = img;
+    jobRequest.parameters.firstName = "Thor Thunder";
+    jobRequest.parameters.lastName = "odinson";
+    jobRequest.parameters.dob = "06/22/1970";
 
     Job job = client.submitJob(jobRequest);
     assertNotNull(job.id);

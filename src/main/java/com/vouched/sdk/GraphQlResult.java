@@ -24,7 +24,8 @@ public class GraphQlResult {
     private String getFieldSchema(Field f) {
         Class<?> type = f.getType();
 
-        if (Modifier.isStatic(f.getModifiers()) || Modifier.isFinal(f.getModifiers())) return "";
+        int mod = f.getModifiers();
+        if (Modifier.isStatic(mod) || Modifier.isFinal(mod) || Modifier.isTransient(mod)) return "";
 
         if (type.isPrimitive() || type == String.class) return f.getName();
 
