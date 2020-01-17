@@ -16,7 +16,7 @@ PRIVATE_KEY=<your private Vouched key>
 
 ### Running
 
-Example code is in `src/main/java/com/vouched/sdk/example/Example.java`. To run it, use
+Example code is in `src/main/java/io/github/vouched/example/Example.java`. To run it, use
 
 ```
 mvn compile exec:java
