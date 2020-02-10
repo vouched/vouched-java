@@ -6,7 +6,14 @@
 
     <groupId>io.github.vouched</groupId>
     <artifactId>vouched-java</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
+    <name>Vouched Java SDK</name>
+    <description>
+        The Vouched Verification SDK is a set of tools that you can use to submit, access and manage verification jobs.
+        You can access Vouched Verification with our client libraries in a wide variety of popular programming
+        languages.
+    </description>
+    <url>https://docs.vouched.id/</url>
 
     <organization>
         <name>Vouched</name>
@@ -20,6 +27,27 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
+    <developers>
+        <developer>
+            <id>johncao</id>
+            <name>John Cao</name>
+            <email>cao@vouched.id</email>
+            <organization>Vouched</organization>
+            <organizationUrl>https://www.vouched.id/</organizationUrl>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/vouched/vouched-java.git</connection>
+        <developerConnection>scm:git:git://github.com/vouched/vouched-java.git</developerConnection>
+        <url>https://github.com/vouched/vouched-java</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <distributionManagement>
         <snapshotRepository>

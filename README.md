@@ -56,7 +56,7 @@ Publishing consists of initial one-time steps, and recurrent steps to publish a 
 1. Create new project ticket. https://issues.sonatype.org/secure/CreateIssue.jspa?issuetype=21&pid=10134 . 
 Use values from pom.xml for ticket fields. They will require to validate group id by either creating a Git repo or 
 DNS record, depending on group id value. After ticket resolution Sonatype will be ready to accept JARs for publising
-1. Configure PGP, is not already, guide https://central.sonatype.org/pages/working-with-pgp-signatures.html
+1. Configure PGP, is not already, guide https://central.sonatype.org/pages/working-with-pgp-signatures.html. Do not forget to push GPG keys to remote servers.
 1. Configure Maven `settings.xml`. to add Jira account from step 1 and GPG passphrase. File should look like this:
 ```
 <settings>
