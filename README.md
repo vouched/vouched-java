@@ -12,7 +12,6 @@ Before development, create file `.env` in project root with your private Vouched
 
 ```
 PRIVATE_KEY=<your private Vouched key>
-TEST_JOB_ID=<ID of one of existing jobs, will be removed during test execution>
 ```
 
 Also create file `~/.m2/settings.xml` with a key to deploy SDK JAR to Maven repository:
