@@ -26,6 +26,21 @@ public class Client {
         public String secretClientKey;
     }
 
+    public Job crosscheck(CrossCheckRequest request) {
+        GraphqlMutation q = new DefaultGraphqlMutation("crosscheckIdentity");
+        q
+                .addParameter("address", request.address)
+                .addParameter("email", request.email)
+                .addParameter("phone", request.phone)
+                .addParameter("firstName", request.firstName)
+                .addParameter("lastName", request.lastName)
+                .addParameter("ipAddress", request.ipAddress)
+
+        q.addResultAttributes(new GraphQlResult().getAttributes(CrossCheck.class));
+
+        GraphQlClient client = new GraphQlClient(Config.get().getServer(), this.key);
+        return client.doRequest(q, CrossCheck.class, "crosscheckIdentity");
+    }
     public Job submitJob(JobRequestInput jobRequest) {
         GraphqlMutation q = new DefaultGraphqlMutation("submitJob");
         q
