@@ -26,15 +26,25 @@ public class Client {
         public String secretClientKey;
     }
 
-    public Job crosscheck(CrossCheckRequest request) {
+    public CrossCheck crosscheck(CrossCheckRequest request) {
+        InputAddress address = null;
+        if( request.address != null ){
+            address = new InputAddress();
+            address.unit = request.address.unit;
+            address.streetAddress = request.address.streetAddress;
+            address.city = request.address.city;
+            address.state = request.address.state;
+            address.postalCode = request.address.postalCode;
+            address.country = request.address.country;
+        }
         GraphqlMutation q = new DefaultGraphqlMutation("crosscheckIdentity");
         q
-                .addParameter("address", request.address)
                 .addParameter("email", request.email)
                 .addParameter("phone", request.phone)
                 .addParameter("firstName", request.firstName)
                 .addParameter("lastName", request.lastName)
                 .addParameter("ipAddress", request.ipAddress)
+                .addObjectParameter("address", address);
 
         q.addResultAttributes(new GraphQlResult().getAttributes(CrossCheck.class));
 

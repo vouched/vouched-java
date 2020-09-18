@@ -9,9 +9,9 @@ public class IPAddress{
   public Location location;
   public String isp;
   public String organization;
-  public Boolean isAnonymous;
-  public Boolean isAnonymousVpn;
-  public Boolean isAnonymousHosting;
+  public boolean isAnonymous;
+  public boolean isAnonymousVpn;
+  public boolean isAnonymousHosting;
   public String userType;
 }
 

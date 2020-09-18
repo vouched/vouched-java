@@ -3,14 +3,14 @@ package io.github.vouched;
 import java.util.List;
 
 public class CrossCheckIdentityAddress{
-  public List<VouchedError> errors;
-  public List<VouchedError> warnings;
-  public Boolean isValid;
-  public Boolean isMatch;
+  public CrossCheckErrorAddress [] errors;
+  public CrossCheckWarningAddress [] warnings;
+  public boolean isValid;
+  public boolean isMatch;
   public String name;
-  public CrossCheckAgeRange ageRange;
-  public Boolean isForwarder;
-  public Boolean isCommercial;
+  public CrossCheckAgeRangeAddress ageRange;
+  public boolean isForwarder;
+  public boolean isCommercial;
   public String type;
 }
 
