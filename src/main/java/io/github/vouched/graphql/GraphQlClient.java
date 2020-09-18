@@ -21,14 +21,9 @@ public class GraphQlClient {
 
     public <T> T doRequest(GraphqlRequest request, Class<T> responseClass, String responseKey) throws VouchedException {
         try {
-//            System.out.println("OUT: " + request.toString());
-
             String result = doHttpRequest(request.toString(), GraphqlRequestType.POST);
 
-//            System.out.println("IN: " + result);
-
             if (result == null) throw new IOException("Failed to fetch");
-
             ObjectMapper responseMapper = createResponseMapper(responseClass, responseKey);
             return responseMapper.readValue(result, responseClass);
         } catch (IOException e) {
@@ -45,7 +40,8 @@ public class GraphQlClient {
         headers.put("Cache-Control", "no-cache");
         headers.put("X-Api-Key", key);
 
-        return httpClientUtil.doPostJson(server, json, headers);
+        String result = httpClientUtil.doPostJson(server, json, headers);
+        return result;
     }
 
     @SuppressWarnings("unchecked")

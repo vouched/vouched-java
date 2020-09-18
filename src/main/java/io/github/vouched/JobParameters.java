@@ -1,13 +1,10 @@
 package io.github.vouched;
 
-public class JobParameters {
-    public String idPhoto;
-    public String userPhoto;
-    public String twicPhoto;
-    public String carInsurancePhoto;
-    public String dotPhoto;
-    public String idPhotoBack;
-    public String dob;
-    public String firstName;
-    public String lastName;
+public class JobParameters extends JobParametersInput {
+    public String idPhotoUrl;
+    public String idPhotoDetect;	
+    public String idPhotoDetectUrl;
+    public String userPhotoUrl;	
+    public String userPhotoDetect;
+    public String userPhotoDetectUrl;
 }

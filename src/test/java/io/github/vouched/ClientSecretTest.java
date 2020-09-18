@@ -33,7 +33,9 @@ public class ClientSecretTest {
   public void shouldUpdateSecretSuccessfully() throws VouchedException {
     Client client = new Client(Config.get().getPrivateKey());
 
-    String key = client.updateSecretClientKey(Config.get().getPrivateKey());
+    Config config = Config.get();
+    String privateKey = config.getPrivateKey();
+    String key = client.updateSecretClientKey(privateKey);
     assertEquals(Config.get().getPrivateKey(), key);
   }
 }

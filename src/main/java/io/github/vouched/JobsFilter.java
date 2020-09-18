@@ -15,4 +15,5 @@ public class JobsFilter {
     public String to;
     public String from;
     public Boolean withPhotos;
+    public Boolean withPhotoUrls;
 }

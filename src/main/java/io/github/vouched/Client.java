@@ -18,14 +18,15 @@ public class Client {
         q.addResultAttributes(new GraphQlResult().getAttributes(UpdatedKey.class));
 
         GraphQlClient client = new GraphQlClient(Config.get().getServer(), this.key);
-        return client.doRequest(q, UpdatedKey.class, "updateSecretClientKey").secretClientKey;
+        UpdatedKey updatedKey = client.doRequest(q, UpdatedKey.class, "updateSecretClientKey");
+        return updatedKey.secretClientKey;
     }
 
     public static class UpdatedKey {
         public String secretClientKey;
     }
 
-    public Job submitJob(JobRequest jobRequest) {
+    public Job submitJob(JobRequestInput jobRequest) {
         GraphqlMutation q = new DefaultGraphqlMutation("submitJob");
         q
                 .addParameter("type", jobRequest.type)
@@ -62,7 +63,8 @@ public class Client {
                 .addParameter("status", filter.status)
                 .addParameter("to", filter.to)
                 .addParameter("from", filter.from)
-                .addParameter("withPhotos", filter.withPhotos);
+                .addParameter("withPhotos", filter.withPhotos)
+                .addParameter("withPhotoUrls", filter.withPhotoUrls);
 
         q.addResultAttributes(new GraphQlResult().getAttributes(Jobs.class));
 
