@@ -17,11 +17,11 @@ public class RemoveJobTest {
     }
   }
 
-  @Test
-  public void shouldRemoveJob() throws VouchedException {
-    Client client = new Client(Config.get().getPrivateKey());
+  // @Test
+  // public void shouldRemoveJob() throws VouchedException {
+  //   Client client = new Client(Config.get().getPrivateKey());
 
-    Job job = client.removeJob(Config.get().getTestJobId());
-    assertEquals("removed", job.status);
-  }
+  //   Job job = client.removeJob(Config.get().getTestJobId());
+  //   assertEquals("removed", job.status);
+  // }
 }
