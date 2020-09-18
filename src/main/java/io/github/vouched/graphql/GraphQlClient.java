@@ -12,6 +12,7 @@ import org.mountcloud.graphql.util.HttpClientUtil;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import com.google.gson.*;
 
 public class GraphQlClient {
     public GraphQlClient(String server, String key) {
@@ -21,17 +22,20 @@ public class GraphQlClient {
 
     public <T> T doRequest(GraphqlRequest request, Class<T> responseClass, String responseKey) throws VouchedException {
         try {
-//            System.out.println("OUT: " + request.toString());
-
             String result = doHttpRequest(request.toString(), GraphqlRequestType.POST);
-
-//            System.out.println("IN: " + result);
+            // System.out.println(request.toString());
+            // System.out.println(result);
 
             if (result == null) throw new IOException("Failed to fetch");
-
             ObjectMapper responseMapper = createResponseMapper(responseClass, responseKey);
-            return responseMapper.readValue(result, responseClass);
+
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            String json = gson.toJson(result);
+
+            T r = responseMapper.readValue(result, responseClass);
+            return r;
         } catch (IOException e) {
+
             throw new VouchedException(e.getMessage(), VouchedError.ConnectionError, null);
         }
     }
@@ -45,7 +49,8 @@ public class GraphQlClient {
         headers.put("Cache-Control", "no-cache");
         headers.put("X-Api-Key", key);
 
-        return httpClientUtil.doPostJson(server, json, headers);
+        String result = httpClientUtil.doPostJson(server, json, headers);
+        return result;
     }
 
     @SuppressWarnings("unchecked")

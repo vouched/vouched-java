@@ -18,14 +18,40 @@ public class Client {
         q.addResultAttributes(new GraphQlResult().getAttributes(UpdatedKey.class));
 
         GraphQlClient client = new GraphQlClient(Config.get().getServer(), this.key);
-        return client.doRequest(q, UpdatedKey.class, "updateSecretClientKey").secretClientKey;
+        UpdatedKey updatedKey = client.doRequest(q, UpdatedKey.class, "updateSecretClientKey");
+        return updatedKey.secretClientKey;
     }
 
     public static class UpdatedKey {
         public String secretClientKey;
     }
 
-    public Job submitJob(JobRequest jobRequest) {
+    public CrossCheck crosscheck(CrossCheckRequest request) {
+        InputAddress address = null;
+        if( request.address != null ){
+            address = new InputAddress();
+            address.unit = request.address.unit;
+            address.streetAddress = request.address.streetAddress;
+            address.city = request.address.city;
+            address.state = request.address.state;
+            address.postalCode = request.address.postalCode;
+            address.country = request.address.country;
+        }
+        GraphqlMutation q = new DefaultGraphqlMutation("crosscheckIdentity");
+        q
+                .addParameter("email", request.email)
+                .addParameter("phone", request.phone)
+                .addParameter("firstName", request.firstName)
+                .addParameter("lastName", request.lastName)
+                .addParameter("ipAddress", request.ipAddress)
+                .addObjectParameter("address", address);
+
+        q.addResultAttributes(new GraphQlResult().getAttributes(CrossCheck.class));
+
+        GraphQlClient client = new GraphQlClient(Config.get().getServer(), this.key);
+        return client.doRequest(q, CrossCheck.class, "crosscheckIdentity");
+    }
+    public Job submitJob(JobRequestInput jobRequest) {
         GraphqlMutation q = new DefaultGraphqlMutation("submitJob");
         q
                 .addParameter("type", jobRequest.type)
@@ -62,7 +88,8 @@ public class Client {
                 .addParameter("status", filter.status)
                 .addParameter("to", filter.to)
                 .addParameter("from", filter.from)
-                .addParameter("withPhotos", filter.withPhotos);
+                .addParameter("withPhotos", filter.withPhotos)
+                .addParameter("withPhotoUrls", filter.withPhotoUrls);
 
         q.addResultAttributes(new GraphQlResult().getAttributes(Jobs.class));
 
