@@ -14,6 +14,18 @@ Before development, create file `.env` in project root with your private Vouched
 PRIVATE_KEY=<your private Vouched key>
 ```
 
+### Development
+
+SDK code is test-covered. To run tests, use
+
+```
+mvn test
+```
+
+Tests are executed against production server.
+
+### Publishing to repository
+
 Also create file `~/.m2/settings.xml` with a key to deploy SDK JAR to Maven repository:
 
 ```
@@ -32,19 +44,6 @@ Also create file `~/.m2/settings.xml` with a key to deploy SDK JAR to Maven repo
 ```
 
 API key could be obtained by logged in into Bintray.com
-
-### Development
-
-SDK code is test-covered. To run tests, use
-
-```
-mvn test
-```
-
-Tests are executed against production server.
-
-### Publishing to repository
-
 Java SDK uses Sonatype Central Repo to publish JAR to Maven.
 Guide available at https://central.sonatype.org/pages/ossrh-guide.html
 
