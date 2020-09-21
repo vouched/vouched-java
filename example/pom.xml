@@ -29,9 +29,9 @@
 
   <dependencies>
     <dependency>
-      <groupId>io.github.vouched</groupId>
-      <artifactId>vouched-java</artifactId>
-      <version>1.0.3</version>
+      <groupId>id.vouched.java</groupId>
+      <artifactId>vouched-sdk</artifactId>
+      <version>0.0.2</version>
     </dependency>
   </dependencies>
 
