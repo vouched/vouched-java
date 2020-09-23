@@ -7,6 +7,7 @@ public class CrossCheckResult{
   public CrossCheckIdentityEmail email;
   public CrossCheckIdentityPhone phone;
   public CrossCheckAgeRange ageRange;
+  public CrossCheckGender gender;
   public IPAddress ipAddress;
   public CrossCheckConfidences confidences;
 }
