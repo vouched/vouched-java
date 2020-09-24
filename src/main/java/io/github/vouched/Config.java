@@ -26,7 +26,9 @@ public class Config {
     private Dotenv dotenv;
 
     private Config() {
-        dotenv = Dotenv.load();
+        dotenv = Dotenv.configure()
+        .ignoreIfMissing()
+        .load();
     }
 
     private static Config config;
