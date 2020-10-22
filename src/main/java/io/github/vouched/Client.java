@@ -53,8 +53,7 @@ public class Client {
     }
     public Job submitJob(JobRequestInput jobRequest) {
         GraphqlMutation q = new DefaultGraphqlMutation("submitJob");
-        q
-                .addParameter("type", jobRequest.type)
+        q.addParameter("type", jobRequest.type)
                 .addParameter("callbackURL", jobRequest.callbackURL)
                 .addObjectParameter("params", jobRequest.parameters)
                 .addObjectParameter("properties", jobRequest.properties);
@@ -64,6 +63,25 @@ public class Client {
         GraphQlClient client = new GraphQlClient(Config.get().getServer(), this.key);
         return client.doRequest(q, Job.class, "submitJob");
     }
+    public Invite sendInvite(SendInviteInput request) {
+        GraphqlMutation q = new DefaultGraphqlMutation("sendInvite");
+        q.addParameter("type", request.type)
+                .addParameter("email", request.email)
+                .addParameter("phone", request.phone)
+                .addParameter("contact", request.contact)
+                .addParameter("firstName", request.firstName)
+                .addParameter("lastName", request.lastName)
+                .addParameter("templateEmail", request.templateEmail)
+                .addParameter("titleEmail", request.titleEmail)
+                .addParameter("send", request.send)
+                .addParameter("internalId", request.internalId);
+
+        q.addResultAttributes(new GraphQlResult().getAttributes(Invite.class));
+
+        GraphQlClient client = new GraphQlClient(Config.get().getServer(), this.key);
+        return client.doRequest(q, Invite.class, "sendInvite");
+    }
+
 
     public Job removeJob(String id) {
         GraphqlMutation q = new DefaultGraphqlMutation("removeJob");
