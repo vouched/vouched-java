@@ -1,6 +1,6 @@
 # Vouched Java SDK Example
 
-This project demonstrates how to use Vouched Java SDK with Maven. 
+This project demonstrates how to use Vouched Java SDK with Maven.
 
 ### Prerequisites
 
@@ -10,6 +10,7 @@ This project demonstrates how to use Vouched Java SDK with Maven.
 ### Local env
 
 Before development, create file `.env` in project root with your private Vouched key:
+
 ```
 PRIVATE_KEY=<your private Vouched key>
 ```
