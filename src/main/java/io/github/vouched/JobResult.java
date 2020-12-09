@@ -13,5 +13,6 @@ public class JobResult {
     public String firstName;
     public String middleName;
     public String lastName;
+    public GenderResult gender;
     public Confidences confidences;
 }
