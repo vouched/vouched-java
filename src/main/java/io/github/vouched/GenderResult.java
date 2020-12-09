@@ -2,6 +2,6 @@ package io.github.vouched;
 
 
 public class GenderResult{
-  public Gender gender;
+  public String gender;
   public GenderDistribution genderDistribution;
 }
