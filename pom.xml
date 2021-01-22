@@ -6,7 +6,7 @@
 
     <groupId>id.vouched.java</groupId>
     <artifactId>vouched-sdk</artifactId>
-    <version>0.0.6</version>
+    <version>0.0.7</version>
     <name>Vouched Java SDK</name>
     <description>
         The Vouched Verification SDK is a set of tools that you can use to submit, access and manage verification jobs.
