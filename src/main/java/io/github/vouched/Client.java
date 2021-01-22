@@ -65,13 +65,20 @@ public class Client {
     }
     public Invite sendInvite(SendInviteInput request) {
         GraphqlMutation q = new DefaultGraphqlMutation("sendInvite");
+        String templateEmail = request.templateEmail;
+        if(null != templateEmail) {
+            templateEmail = templateEmail.replace("\n", "");
+            templateEmail = templateEmail.replace("\r", "");
+            templateEmail = templateEmail.replace("\t", "");
+        }
+
         q.addParameter("type", request.type)
                 .addParameter("email", request.email)
                 .addParameter("phone", request.phone)
                 .addParameter("contact", request.contact)
                 .addParameter("firstName", request.firstName)
                 .addParameter("lastName", request.lastName)
-                .addParameter("templateEmail", request.templateEmail)
+                .addParameter("templateEmail", templateEmail)
                 .addParameter("titleEmail", request.titleEmail)
                 .addParameter("send", request.send)
                 .addParameter("internalId", request.internalId);
