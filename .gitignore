@@ -3,4 +3,5 @@
 .env
 /target
 deploy-settings.xml
+.DS_Store
 
