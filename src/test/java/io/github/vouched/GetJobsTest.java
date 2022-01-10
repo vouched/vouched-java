@@ -16,9 +16,10 @@ public class GetJobsTest {
   @Test
   public void shouldRetreiveSingleJobById() throws VouchedException {
     Client client = new Client(Config.get().getPrivateKey());
+    String jobId = Config.get().getTestExistingJobId();
 
     JobsFilter f = new JobsFilter();
-    f.id = "OWIOSI5O";
+    f.id = jobId;
 
     Jobs jobs = client.getJobs(f);
     assertEquals(1, jobs.total);

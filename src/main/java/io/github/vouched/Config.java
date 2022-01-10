@@ -15,6 +15,10 @@ public class Config {
         return dotenv.get("TEST_JOB_ID");
     }
 
+    public String getTestExistingJobId() {
+        return dotenv.get("TEST_EXISTING_JOB_ID");
+    }
+
     public static Config get() {
         if (config == null) {
             config = new Config();
