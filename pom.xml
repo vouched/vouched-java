@@ -6,7 +6,7 @@
 
     <groupId>id.vouched.java</groupId>
     <artifactId>vouched-sdk</artifactId>
-    <version>0.0.7</version>
+    <version>1.0.3</version>
     <name>Vouched Java SDK</name>
     <description>
         The Vouched Verification SDK is a set of tools that you can use to submit, access and manage verification jobs.
@@ -71,12 +71,22 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.5</version>
+            <version>1.7.33</version>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.5</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.17.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.17.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.17.1</version>
         </dependency>
         <dependency>
             <groupId>io.github.cdimascio</groupId>
